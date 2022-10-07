@@ -38,8 +38,7 @@ def change_funk(data):
     if name in contacts:
         contacts[name] = phone
         return f"Для контакту {name} змінено номер на {phone}"
-    else:
-        return f"За даним {name} контакту не існує, зверніться до команди add "
+    return f"За даним {name} контакту не існує, зверніться до команди add "
 
 
 
@@ -61,7 +60,7 @@ def show_all_funk():
 
 @input_error
 def quit_funk():  # Функція виходу з команд "good bye", "close", "exit".
-    return ("До наступної зустрічі")
+    return "До наступної зустрічі"
 
 COMMANDS = {
 "hello" : first_step,
@@ -82,18 +81,18 @@ def error_func():
     return "Помилкова команда"
 
 
-def edits(x):
-    variant_1 = x
-    variant_2 = ""
-    for key in COMMANDS:
-        if x.strip().lower().startswith(key):
-            variant_1 = key
-            variant_2 = x[len(variant_1):]
+def edits(input_data):
+    key_part = input_data
+    data_part = ""
+    for command in COMMANDS:
+        if input_data.strip().lower().startswith(command):
+            key_part = command
+            data_part = input_data[len(key_part):]
             break
-    if variant_2:
-        return return_func(variant_1)(variant_2)
+    if data_part:
+        return return_func(key_part)(data_part)
     else:
-        return return_func(variant_1)()
+        return return_func(key_part)()
 
 
 def main():
